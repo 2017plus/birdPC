@@ -1,12 +1,13 @@
-import { Layout, Menu, Breadcrumb, Icon } from 'antd';
+import { Layout, Menu, Breadcrumb, Icon, Button } from 'antd';
 import React, { Component } from 'react';
 import 'antd/dist/antd.css';
 import './home.css';
+import logo from '../../resource/images/logo.jpg';
 
 const { SubMenu } = Menu;
 const { Header, Content, Sider } = Layout;
 
-export default class HomeContainer extends Component {
+class HomeContainer extends Component {
   state = {
     collapsed: false,
     mode: 'inline'
@@ -18,21 +19,31 @@ export default class HomeContainer extends Component {
     });
   };
 
+  _logOut = ()=>{
+    localStorage.removeItem('x-auth-token');
+    this.props.history.push('/login');
+  }
+
   render() {
     return (
       <Layout>
-        <Header className="header">
-          <div className="logo" />
+        <Header className="header" style={{display: 'flex'}} >
+          <div className="logo" style={{backgroundColor: 'blue',width: 100,height: 50}}>
+            <img style={{width: 100, height: 50}} src={logo} />
+          </div>
           <Menu
             theme="dark"
             mode="horizontal"
             defaultSelectedKeys={['2']}
-            style={{ lineHeight: '64px' }}
+            style={{ lineHeight: '64px',backgroundColor: 'red' }}
           >
             <Menu.Item key="1">nav 1</Menu.Item>
             <Menu.Item key="2">nav 2</Menu.Item>
             <Menu.Item key="3">nav 3</Menu.Item>
           </Menu>
+          <div style={{width: 100,height:50}}>
+            <Button type="primary" onClick={this._logOut}>Primary</Button>
+          </div>
         </Header>
         <Layout>
           <Sider width={200} style={{ background: '#fff' }}>
@@ -108,3 +119,5 @@ export default class HomeContainer extends Component {
     );
   }
 }
+
+export default HomeContainer;

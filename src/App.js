@@ -1,30 +1,35 @@
 import React, { Component } from 'react';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import RouteConfig from './components/route/RouteConfig';
+import { Router,Switch,Route } from 'react-router-dom';
+import { connect } from 'react-redux';
+import history from './components/util/History';
+import PrivateRoute from './components/util/PrivateRoute';
+import NotFound from './components/util/NotFoundContainer';
+import LoginContainer from './components/login/LoginContainer';
+import HomeContainer from './components/home/HomeContainer';
+
+type Props = {
+  token: string,
+}
 
 class App extends Component {
+  props: Props;
+
   render() {
     return (
-      <div>
-        <BrowserRouter>
-          <main>
-            <Switch>
-              {RouteConfig.map((route, index) => {
-                return (
-                  <Route
-                    key={index}
-                    path={route.path}
-                    exact={route.exact}
-                    component={route.component}
-                  />
-                );
-              })}
-            </Switch>
-          </main>
-        </BrowserRouter>
-      </div>
+      <Router history={history}>
+        <Switch>
+          <Route exact path='/login' component={LoginContainer} />
+          <PrivateRoute exact path='/' component={HomeContainer} />
+          <PrivateRoute exact path='/home' component={HomeContainer} />
+          <Route component={NotFound} />
+        </Switch>
+      </Router>
     );
   }
 }
 
-export default App;
+const mapStateToProps = state => ({
+  userInfo: state.login.userInfo,
+});
+
+export default connect(mapStateToProps)(App);
