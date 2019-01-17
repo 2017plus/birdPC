@@ -1,7 +1,7 @@
 const loginInitialState = {
   token: '',
   userInfo: {},
-  isLoading: false,
+  isLoading: false
 };
 
 function login(state = loginInitialState, action) {
@@ -16,16 +16,16 @@ function login(state = loginInitialState, action) {
       return {
         token: action.json.result[0].token,
         userInfo: {
-          ...action.json.result[0],
+          ...action.json.result[0]
         },
-        isLoading: false,
+        isLoading: false
       };
-    
+
     default:
       return state;
   }
 }
 
 export default {
-  login,
+  login
 };

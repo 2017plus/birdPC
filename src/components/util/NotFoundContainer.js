@@ -1,14 +1,9 @@
 import React, { Component } from 'react';
-import {withRouter} from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 
 class NotFoundContainer extends Component {
-
   render() {
-    return (
-      <div>
-        404
-      </div>
-    );
+    return <div>404</div>;
   }
 }
 
