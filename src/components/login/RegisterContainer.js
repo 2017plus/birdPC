@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Form, Input, Checkbox, Button, Spin, message, Modal } from 'antd';
 import { Link } from 'react-router-dom';
-import Footer from '../common/Footer';
 import history from '../util/History';
 import { serverUrl } from '../config/env';
 import { Encrypt } from '../util/AES';
@@ -264,7 +263,6 @@ class RegisterContainer extends Component {
             </Form.Item>
           </Form>
         </div>
-        <Footer />
       </div>
     );
   }

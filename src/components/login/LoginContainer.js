@@ -5,16 +5,18 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { Form, Icon, Input, Button, Checkbox, Spin } from 'antd';
 import 'antd/dist/antd.css';
-import Footer from '../common/Footer';
 import { Encrypt } from '../util/AES';
 
 const windowWidth = document.body.clientHeight;
 
 const styles = {
   container: {
-    height: windowWidth,
+    minHeight: windowWidth,
+    flex: 1,
+    flexDirection: 'column',
     display: 'flex',
-    flexDirection: 'column'
+    justifyContent: 'center',
+    alignItems: 'center'
   },
   title: {
     fontSize: 20,
@@ -50,76 +52,58 @@ class LoginContainer extends Component {
     const { getFieldDecorator } = this.props.form;
     return (
       <div style={styles.container}>
-        <div
-          style={{
-            flex: 1,
-            flexDirection: 'column',
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center'
-          }}
-        >
-          <div style={styles.title}>bird want fly</div>
-          <Form onSubmit={this.handleSubmit} style={styles.form}>
-            <Form.Item>
-              {getFieldDecorator('userName', {
-                rules: [
-                  { required: true, message: '请输入用户名或邮箱!' },
-                  {
-                    pattern: /^[a-z0-9]+([._\\-]*[a-z0-9])*@?([a-z0-9]+[-a-z0-9]*[a-z0-9]+.){0,63}[a-z0-9]+$/,
-                    message: '请检查您的用户名是否正确!'
-                  }
-                ]
-              })(
-                <Input
-                  prefix={
-                    <Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />
-                  }
-                  size="large"
-                  allowClear
-                  placeholder="请输入用户名/邮箱"
-                />
-              )}
-            </Form.Item>
-            <Form.Item>
-              {getFieldDecorator('password', {
-                rules: [{ required: true, message: '请输入密码!' }]
-              })(
-                <Input.Password
-                  prefix={
-                    <Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />
-                  }
-                  size="large"
-                  type="password"
-                  placeholder="请输入密码"
-                />
-              )}
-            </Form.Item>
-            <Form.Item>
-              {getFieldDecorator('remember', {
-                valuePropName: 'checked',
-                initialValue: true
-              })(<Checkbox>记住密码</Checkbox>)}
-              <Link style={styles.forgot} to="/forgetPassowrd">
-                忘记密码
-              </Link>
-              <Spin
-                tip="Loading..."
-                spinning={this.props.isLoading}
-              >
-                <Button
-                  type="primary"
-                  htmlType="submit"
-                  style={styles.loginBtn}
-                >
-                  登 录
-                </Button>
-              </Spin>
-              没有账号？<Link to="/register">立即注册!</Link>
-            </Form.Item>
-          </Form>
-        </div>
-        <Footer />
+        <div style={styles.title}>bird want fly</div>
+        <Form onSubmit={this.handleSubmit} style={styles.form}>
+          <Form.Item>
+            {getFieldDecorator('userName', {
+              rules: [
+                { required: true, message: '请输入用户名或邮箱!' },
+                {
+                  pattern: /^[a-z0-9]+([._\\-]*[a-z0-9])*@?([a-z0-9]+[-a-z0-9]*[a-z0-9]+.){0,63}[a-z0-9]+$/,
+                  message: '请检查您的用户名是否正确!'
+                }
+              ]
+            })(
+              <Input
+                prefix={
+                  <Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />
+                }
+                size="large"
+                allowClear
+                placeholder="请输入用户名/邮箱"
+              />
+            )}
+          </Form.Item>
+          <Form.Item>
+            {getFieldDecorator('password', {
+              rules: [{ required: true, message: '请输入密码!' }]
+            })(
+              <Input.Password
+                prefix={
+                  <Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />
+                }
+                size="large"
+                type="password"
+                placeholder="请输入密码"
+              />
+            )}
+          </Form.Item>
+          <Form.Item>
+            {getFieldDecorator('remember', {
+              valuePropName: 'checked',
+              initialValue: true
+            })(<Checkbox>记住密码</Checkbox>)}
+            <Link style={styles.forgot} to="/forgetPassowrd">
+              忘记密码
+            </Link>
+            <Spin tip="Loading..." spinning={this.props.isLoading}>
+              <Button type="primary" htmlType="submit" style={styles.loginBtn}>
+                登 录
+              </Button>
+            </Spin>
+            没有账号？<Link to="/register">立即注册!</Link>
+          </Form.Item>
+        </Form>
       </div>
     );
   }

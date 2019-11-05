@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Layout } from 'antd';
 import 'antd/dist/antd.css';
+import {footerHeight} from '../config/System';
 
 const { Footer } = Layout;
 
@@ -11,7 +12,7 @@ export default class CommonHeader extends Component {
         style={{
           textAlign: 'center',
           minWidth: '100%',
-          height: 68,
+          height: footerHeight,
           marginTop: -68,
         }}
       >

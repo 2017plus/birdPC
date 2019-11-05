@@ -4,23 +4,38 @@ import history from './components/util/History';
 import PrivateRoute from './components/util/PrivateRoute';
 import NotFound from './components/util/NotFoundContainer';
 import LoginContainer from './components/login/LoginContainer';
-import HomeContainer from './components/home/HomeContainer';
+import IndexContainer from './components/home/IndexContainer';
 import RegisterContainer from './components/login/RegisterContainer';
+import AdminContainer from './components/admin/AdminContainer';
+import Footer from './components/common/Footer';
+const windowHeight = document.body.clientHeight;
 
 export default class App extends Component {
   props: Props;
 
   render() {
     return (
-      <Router history={history}>
-        <Switch>
-          <Route exact path="/login" component={LoginContainer} />
-          <PrivateRoute exact path="/" component={HomeContainer} />
-          <PrivateRoute exact path="/home" component={HomeContainer} />
-          <Route exact path="/register" component={RegisterContainer} />
-          <Route component={NotFound} />
-        </Switch>
-      </Router>
+      <div
+        style={{
+          minHeight: windowHeight,
+          display: 'flex',
+          flexDirection: 'column'
+        }}
+      >
+        <div style={{ flex: 1 }}>
+          <Router history={history}>
+            <Switch>
+              <Route exact path="/login" component={LoginContainer} />
+              <Route exact path="/register" component={RegisterContainer} />
+              <Route exact path="/admin" component={AdminContainer} />
+              <PrivateRoute path="/" component={IndexContainer} />
+              <Route component={NotFound} />
+            </Switch>
+          </Router>
+        </div>
+
+        <Footer />
+      </div>
     );
   }
 }

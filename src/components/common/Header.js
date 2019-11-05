@@ -82,13 +82,17 @@ export default class CommonHeader extends Component {
   };
 
   // 点击一级目录
-  _clickMenu = ({ item, key, keyPath }) => {};
+  _clickMenu = ({ item, key, keyPath }) => {
+    this.setState({
+        current: key
+      });
+  };
 
   render() {
     const { oneCategory, subMenuCategory } = this.state;
     return (
       <Header style={styles.header}>
-        <div className="logo" style={styles.logo}>
+        <div style={styles.logo}>
           <Link to="/">
             <img src={logo} alt="bird want fly" style={styles.logoImg} />
           </Link>
@@ -99,6 +103,7 @@ export default class CommonHeader extends Component {
             mode="horizontal"
             style={{ lineHeight: '64px' }}
             onClick={this._clickMenu}
+            selectedKeys={[this.state.current]}
           >
             {oneCategory.map((item, i) => (
               <Menu.Item key={item.link}>

@@ -10,7 +10,11 @@ function login(state = loginInitialState, action) {
       return { ...state, isLoading: true };
 
     case 'LOGIN_POST_FAILURE':
-      return { ...state, errorMessage: action.errorMessage, isLoading: false };
+      return {
+        ...state,
+        errorMessage: action.error || action.errorMessage,
+        isLoading: false
+      };
 
     case 'LOGIN_POST_SUCCESS':
       return {
